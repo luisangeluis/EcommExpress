@@ -1,5 +1,5 @@
 import { Optional } from "sequelize";
-import { Column, DataType, IsUUID, Model, PrimaryKey, Table } from "sequelize-typescript";
+import { AllowNull, Column, DataType, IsUUID, Model, NotNull, PrimaryKey, Table } from "sequelize-typescript";
 
 interface ProductAttributes {
     id: string;
@@ -18,16 +18,17 @@ export default class Product extends Model<ProductAttributes, ProductCreationAtt
     @Column({ type: DataType.UUID })
     id!: string;
 
-    @Column({
-        type: DataType.STRING(100)
-    })
+    @AllowNull(false)
+    @Column({type: DataType.STRING(100)})
     titlte!: string;
 
+    @AllowNull(false)
     @Column({
         type: DataType.STRING
     })
     description!: string;
-
+    
+    @AllowNull(false)
     @Column({
         type: DataType.DECIMAL
     })
