@@ -1,12 +1,7 @@
 import express from "express";
-import dotenv from "dotenv";
 import productRoutes from "./routes/product.routes";
 import { connectToDB } from "./db/sequelizeConnect";
 import { port } from "./config";
-
-// dotenv.config({
-//   path: process.env.NODE_ENV === "development" ? ".dev.env" : ".env"
-// });
 
 const app = express();
 // const port = port || 3000;
