@@ -5,10 +5,18 @@ const ProductDB = buildDbClient(Product);
 
 export const getAllProducts = async () => {
     const options = {
-        where:{
-            title:""
+        where: {
+            title: ""
         }
     }
     const products = await ProductDB.findAll();
     return products;
+}
+
+export const getProductById = async (id: string) => {
+    return await ProductDB.findById(id);
+}
+
+export const createProduct = async (product: Product) => {
+    return await ProductDB.create(product);
 }

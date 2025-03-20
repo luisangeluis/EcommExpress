@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-app.use("/api", productRoutes)
+app.use("/api/products", productRoutes)
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`)

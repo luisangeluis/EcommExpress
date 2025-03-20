@@ -22,41 +22,41 @@ export const createFakeData = async () => {
                 name: "home"
             }
         ])
-        Product.bulkCreate([
+        await Product.bulkCreate([
             {
                 id: getUUID(),
                 title: "ball",
                 description: "a ball",
                 price: 50,
-                categoryId:categories[0].id
+                categoryId: categories[0].id
             },
             {
                 id: getUUID(),
                 title: "xbox",
                 description: "a xbox",
                 price: 400,
-                categoryId:categories[1].id
+                categoryId: categories[1].id
             },
             {
                 id: getUUID(),
                 title: "smartphone",
                 description: "a smartphone",
                 price: 300,
-                categoryId:categories[1].id
+                categoryId: categories[1].id
             },
             {
                 id: getUUID(),
                 title: "laptop",
                 description: "a laptop",
                 price: 600,
-                categoryId:categories[1].id
+                categoryId: categories[1].id
             },
             {
                 id: getUUID(),
                 title: "backpack",
                 description: "a backpack",
                 price: 150.50,
-                categoryId:categories[2].id
+                categoryId: categories[2].id
 
             },
             {
@@ -64,35 +64,35 @@ export const createFakeData = async () => {
                 title: "ball",
                 description: "a ball",
                 price: 500,
-                categoryId:categories[0].id
+                categoryId: categories[0].id
             },
             {
                 id: getUUID(),
                 title: "jeans",
                 description: "jeans",
                 price: 250,
-                categoryId:categories[3].id
+                categoryId: categories[3].id
             },
             {
                 id: getUUID(),
                 title: "power outlet",
                 description: "a power outlet",
                 price: 100.25,
-                categoryId:categories[3].id
+                categoryId: categories[3].id
             },
             {
                 id: getUUID(),
                 title: "toy cart",
                 description: "a toy cart",
                 price: 80.90,
-                categoryId:categories[0].id
+                categoryId: categories[0].id
             },
             {
                 id: getUUID(),
                 title: "microwave",
                 description: "a microwave",
                 price: 225.50,
-                categoryId:categories[3].id
+                categoryId: categories[3].id
             }
         ], {
             validate: true
