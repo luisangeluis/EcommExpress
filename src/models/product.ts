@@ -11,7 +11,7 @@ interface ProductAttributes {
 
 }
 
-interface ProductCreationAttributes extends Optional<ProductAttributes, 'id'> { }
+export interface ProductCreationAttributes extends Optional<ProductAttributes, 'id'> { }
 
 @Table
 export default class Product extends Model<ProductAttributes, ProductCreationAttributes> {

@@ -1,5 +1,6 @@
-import Product from "../models/product"
+import Product, { ProductCreationAttributes } from "../models/product"
 import { buildDbClient } from "../plugins/db-client";
+import { getUUID } from "../plugins/uuid";
 
 const ProductDB = buildDbClient(Product);
 
@@ -17,6 +18,6 @@ export const getProductById = async (id: string) => {
     return await ProductDB.findById(id);
 }
 
-export const createProduct = async (product: Product) => {
-    return await ProductDB.create(product);
+export const createProduct = async (product: ProductCreationAttributes) => {
+    return await ProductDB.create({ ...product, id: getUUID() });
 }
