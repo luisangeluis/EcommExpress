@@ -40,11 +40,12 @@ export const getById = async (req: Request, res: Response) => {
 }
 
 export const post = async (req: Request, res: Response) => {
-    const { title, description, price, categoryId } = req.body;
-    const productToCreate = { title, description, price, categoryId }
-
+    // const { title, description, price, categoryId } = req.body;
+    // const productToCreate = { title, description, price, categoryId }
+    const data = req.body;
     try {
-        const product = await productServices.createProduct(productToCreate);
+        // const product = await productServices.createProduct(productToCreate);
+        const product = await productServices.createProduct(data);
 
         res.status(201).json(product);
     } catch (error: any) {
