@@ -21,7 +21,7 @@ export default class Product extends Model<ProductAttributes, ProductCreationAtt
     id!: string;
 
     @AllowNull(false)
-    @Column({ type: DataType.STRING(100) })
+    @Column({ type: DataType.STRING(200) })
     title!: string;
 
     @AllowNull(false)

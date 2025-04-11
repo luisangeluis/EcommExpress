@@ -40,16 +40,22 @@ export const getById = async (req: Request, res: Response) => {
 }
 
 export const post = async (req: Request, res: Response) => {
-    // const { title, description, price, categoryId } = req.body;
-    // const productToCreate = { title, description, price, categoryId }
     const data = req.body;
     try {
-        // const product = await productServices.createProduct(productToCreate);
+        const category = await getCategoryById(data.categoryId);
+
+        if (category === null) {
+            res.status(400).json({ message: `Category with id: ${data.categoryId} doesn't exist` })
+            return;
+        }
+
         const product = await productServices.createProduct(data);
 
         res.status(201).json(product);
+        return;
     } catch (error: any) {
         res.status(400).json({ message: error.message });
+        return;
     }
 }
 
