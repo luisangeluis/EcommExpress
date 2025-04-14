@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize-typescript";
 import { dbName, dbPassword, dbUser, host } from "../config";
 import path from "path";
-import { createFakeData } from "../utils/createFakeData";
+import { createFakeData } from "../seeders/createFakeData";
 
 const sequelize = new Sequelize(dbName, dbUser, dbPassword, {
     host,
@@ -12,8 +12,7 @@ const sequelize = new Sequelize(dbName, dbUser, dbPassword, {
 export const connectToDB = async () => {
     try {
         await sequelize.authenticate();//
-        await sequelize.sync({force:true});
-        await createFakeData();
+        await sequelize.sync();
     } catch (error) {
         throw new Error(`Unable to connect to the database: ${error}`);
     }

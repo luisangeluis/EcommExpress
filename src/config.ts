@@ -8,7 +8,7 @@ dotenv.config({
 // DB_NAME=luisangel_ecomm
 // DB_USER=luisangel_2
 // DB_PASSWORD=Nxtlxer00 
-export const port = process.env.PORT;
+export const port = process.env.PORT || 3000;
 export const host = process.env.DB_HOST;
 export const dbName = process.env.DB_NAME as string;
 export const dbUser = process.env.DB_USER as string;
