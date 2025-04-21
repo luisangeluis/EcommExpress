@@ -15,7 +15,6 @@ export const getAll = async (req: Request, res: Response) => {
         res.status(400).json({ message: error.message });
         return;
     }
-
 }
 
 export const getById = async (req: Request, res: Response) => {
@@ -27,7 +26,6 @@ export const getById = async (req: Request, res: Response) => {
             res.status(401).json({ message: `Product with id: ${id} not found.` })
             return;
         }
-
 
         res.status(200).json(product);
         return;
@@ -89,7 +87,6 @@ export const update = async (req: Request, res: Response) => {
         if (category?.id)
             productToUpdate.categoryId = categoryId
     }
-
 
     await productServices.updateProduct(id, productToUpdate);
 

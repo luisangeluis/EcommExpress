@@ -1,5 +1,7 @@
 import Category from "../models/category";
 import Product from "../models/product";
+import Role from "../models/role";
+import User from "../models/user";
 import { getUUID } from "../plugins/uuid";
 
 export const createFakeData = async () => {
@@ -97,8 +99,23 @@ export const createFakeData = async () => {
         ], {
             validate: true
         });
+
+        const roles = await Role.bulkCreate([
+            { id: getUUID(), name: "admin" },
+            { id: getUUID(), name: "seller" },
+            { id: getUUID(), name: "client" }
+        ],
+            { validate: true })
+
+        await User.bulkCreate([
+            { id: getUUID(), firstName: "luis", lastName: "gonzalez", email: "luis@email.com", password: "luis123abc", roleId: roles[0].id },
+            { id: getUUID(), firstName: "angel", lastName: "ramirez", email: "angel@email.com", password: "angel123abc", roleId: roles[1].id },
+            { id: getUUID(), firstName: "pedro", lastName: "lopez", email: "pedro@email.com", password: "pedro123abc", roleId: roles[2].id },
+
+        ], { validate: true })
+
+
     } catch (error: any) {
         console.log(error);
-
     }
 }

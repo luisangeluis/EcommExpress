@@ -12,7 +12,7 @@ const sequelize = new Sequelize(dbName, dbUser, dbPassword, {
 export const connectToDB = async () => {
     try {
         await sequelize.authenticate();//
-        await sequelize.sync();
+        await sequelize.sync({force:true});
     } catch (error) {
         throw new Error(`Unable to connect to the database: ${error}`);
     }

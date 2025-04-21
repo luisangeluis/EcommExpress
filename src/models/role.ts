@@ -1,5 +1,6 @@
 import { Optional } from "sequelize";
-import { AllowNull, Column, DataType, Model, PrimaryKey, Table } from "sequelize-typescript";
+import { AllowNull, Column, DataType, HasMany, Model, PrimaryKey, Table } from "sequelize-typescript";
+import User from "./user";
 
 interface RoleAttributes {
     id: string;
@@ -17,4 +18,7 @@ export default class Role extends Model<RoleAttributes, RoleCreationAttributes> 
     @AllowNull(false)
     @Column({ type: DataType.STRING(200) })
     name!: string;
+
+    @HasMany(() => User)
+    users?: User[];
 }
