@@ -1,16 +1,22 @@
 import { Router } from "express";
 import * as productControllers from "../controllers/product.controllers";
-import { validateDTO } from "../middlewares/validateDTO";
 import { CreateProductDTO } from "../DTOs/product/createProductDTO";
+import { UpdateProductDTO } from "../DTOs/product/updateProductDTO";
+import { validateDTOMiddleware } from "../middlewares/validateDTOMiddleware";
+import { productExistsMiddleware } from "../middlewares/productExistsMiddleware";
+import { bodyIsEmptyMiddleware } from "../middlewares/bodyIsEmptyMiddleware";
+import { categoryExistsMiddleware } from "../middlewares/categoryExistsMiddleware";
 
 const router = Router();
 
 router.route("/")
     .get(productControllers.getAll)
-    .post(validateDTO(CreateProductDTO), productControllers.post)
-    .put(productControllers.update)
-    .delete(productControllers.remove);
+    .post(validateDTOMiddleware(CreateProductDTO), categoryExistsMiddleware, productControllers.post)
 
-router.route("/:id").get(productControllers.getById);
+router.route("/:id")
+    .get(productControllers.getById)
+    .put(validateDTOMiddleware(UpdateProductDTO), bodyIsEmptyMiddleware, categoryExistsMiddleware, productExistsMiddleware,
+        productControllers.update)
+    .delete(productExistsMiddleware, productControllers.remove);
 
 export default router;

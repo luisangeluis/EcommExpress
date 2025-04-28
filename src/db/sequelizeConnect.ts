@@ -1,7 +1,6 @@
 import { Sequelize } from "sequelize-typescript";
 import { dbName, dbPassword, dbUser, host } from "../config";
 import path from "path";
-import { createFakeData } from "../seeders/createFakeData";
 
 const sequelize = new Sequelize(dbName, dbUser, dbPassword, {
     host,
