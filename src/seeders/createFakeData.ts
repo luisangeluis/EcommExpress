@@ -3,9 +3,19 @@ import Product from "../models/product";
 import Role from "../models/role";
 import User from "../models/user";
 import { getUUID } from "../plugins/uuid";
+import { sequelize } from "../db/sequelizeConnect";
 
 export const createFakeData = async () => {
     try {
+        await sequelize.query('SET FOREIGN_KEY_CHECKS = 0');
+        await Product.destroy({ truncate: true, cascade: true });
+        await Category.destroy({ truncate: true, cascade: true });
+        await User.destroy({ truncate: true, cascade: true });
+        await Role.destroy({ truncate: true, cascade:true });
+
+        await sequelize.query('SET FOREIGN_KEY_CHECKS = 1');
+
+
         const categories = await Category.bulkCreate([
             {
                 id: getUUID(),
