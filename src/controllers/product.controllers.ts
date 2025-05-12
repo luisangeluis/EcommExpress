@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import * as productServices from "../services/product.services";
+import { log } from "node:console";
 
 export const getAll = async (req: Request, res: Response) => {
     try {
@@ -43,8 +44,10 @@ export const update = async (req: Request, res: Response) => {
 
     try {
         await productServices.updateProduct(id, req.body);
-        res.status(201).json({ message: `Product with id ${id} updated` });
+        res.status(200).json({ message: `Product with id ${id} updated` });
     } catch (error: any) {
+        log(error);
+        log(error.message);
         res.status(500).json({ message: "Internal server error" });
     }
 }

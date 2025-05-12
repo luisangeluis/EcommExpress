@@ -11,11 +11,11 @@ const router = Router();
 
 router.route("/")
     .get(productControllers.getAll)
-    .post(validateDTOMiddleware(CreateProductDTO), categoryExistsMiddleware, productControllers.post)
+    .post(validateDTOMiddleware(CreateProductDTO), productControllers.post)
 
 router.route("/:id")
     .get(productControllers.getById)
-    .put(validateDTOMiddleware(UpdateProductDTO), bodyIsEmptyMiddleware, categoryExistsMiddleware, productExistsMiddleware,
+    .put(validateDTOMiddleware(UpdateProductDTO), bodyIsEmptyMiddleware, productExistsMiddleware,
         productControllers.update)
     .delete(productExistsMiddleware, productControllers.remove);
 

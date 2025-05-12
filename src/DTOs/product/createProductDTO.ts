@@ -1,4 +1,5 @@
 import { IsNumber, IsString, IsUUID, MaxLength,Min } from "class-validator";
+import { IsCategoryExists } from "../../validators/IsCategoryExists";
 
 export class CreateProductDTO{
     @MaxLength(100)
@@ -13,5 +14,6 @@ export class CreateProductDTO{
     price!:number
 
     @IsUUID()
+    @IsCategoryExists({message: 'The provided categoryId does not exist in the database'})
     categoryId!:string;
 }

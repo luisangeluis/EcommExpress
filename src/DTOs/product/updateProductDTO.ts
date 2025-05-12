@@ -1,4 +1,5 @@
 import { IsNumber, IsOptional, IsString, IsUUID, MaxLength,Min } from "class-validator";
+import { IsCategoryExists } from "../../validators/IsCategoryExists";
 
 export class UpdateProductDTO{
     @IsOptional()
@@ -17,5 +18,6 @@ export class UpdateProductDTO{
 
     @IsOptional()
     @IsUUID()
+    @IsCategoryExists({message: 'The provided categoryId does not exist in the database'})
     categoryId?:string;
 }
