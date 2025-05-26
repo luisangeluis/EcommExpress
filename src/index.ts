@@ -1,4 +1,4 @@
-import express from "express";
+import express, { NextFunction, Request, Response } from "express";
 import productRoutes from "./routes/product.routes";
 import { connectToDB } from "./db/sequelizeConnect";
 import { port } from "./config";
@@ -13,11 +13,22 @@ connectToDB()//
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+  console.error(err.stack);
+
+  const status = res.statusCode !== 200 ? res.statusCode : 500;
+
+  res.status(status).json({
+    message: err.message,
+    stack: process.env.NODE_ENV === 'production' ? null : err.stack,
+  });
+});
+
 app.use("/api/products", productRoutes)
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+// app.get('/', (req, res) => {
+//   res.send('Hello World!')
+// })
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`)

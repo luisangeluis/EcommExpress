@@ -6,11 +6,12 @@ import { validateDTOMiddleware } from "../middlewares/validateDTOMiddleware";
 import { productExistsMiddleware } from "../middlewares/productExistsMiddleware";
 import { bodyIsEmptyMiddleware } from "../middlewares/bodyIsEmptyMiddleware";
 import { categoryExistsMiddleware } from "../middlewares/categoryExistsMiddleware";
+import { asyncHandler } from "../utils/asyncHandler";
 
 const router = Router();
 
 router.route("/")
-    .get(productControllers.getAll)
+    .get(asyncHandler(productControllers.getAll))
     .post(validateDTOMiddleware(CreateProductDTO), productControllers.post)
 
 router.route("/:id")
