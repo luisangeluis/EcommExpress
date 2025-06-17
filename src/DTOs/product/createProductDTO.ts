@@ -14,6 +14,6 @@ export class CreateProductDTO{
     price!:number
 
     @IsUUID()
-    @IsCategoryExists({message: 'The provided categoryId does not exist in the database'})
+    // @IsCategoryExists({message: 'The provided categoryId does not exist in the database'})
     categoryId!:string;
 }

@@ -23,13 +23,13 @@ export const getById = async (req: Request, res: Response) => {
 export const post = async (req: Request, res: Response) => {
     const data = req.body;
 
-    try {
+    // try {
         const product = await productServices.createProduct(data);
         res.status(201).json(product);
-    } catch (error: any) {
-        console.log(error.message);
-        res.status(500).json({ message: "Internal server error" });
-    }
+    // } catch (error: any) {
+    //     console.log(error.message);
+    //     res.status(500).json({ message: "Internal server error" });
+    // }
 }
 
 export const update = async (req: Request, res: Response) => {

@@ -11,7 +11,13 @@ export function validateDTOMiddleware(dtoClass: any) {
         });
 
         if (errors.length > 0) {
-            res.status(400).json(errors);
+
+            const formattedErrors = errors.map(err=>({
+                field:err.property,
+                errors:Object.values(err.constraints || {})
+            }));
+            // console.log()
+            res.status(400).json(formattedErrors);
             return; 
         }
 
