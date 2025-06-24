@@ -12,11 +12,15 @@ const router = Router();
 
 router.route("/")
     .get(asyncHandler(productControllers.getAll))
-    .post(validateDTOMiddleware(CreateProductDTO),categoryExistsMiddleware,asyncHandler(productControllers.post))
+    .post(validateDTOMiddleware(CreateProductDTO),
+        categoryExistsMiddleware,
+        asyncHandler(productControllers.post))
 
 router.route("/:id")
     .get(asyncHandler(productControllers.getById))
-    .put(validateDTOMiddleware(UpdateProductDTO), bodyIsEmptyMiddleware, productExistsMiddleware,
+    .put(validateDTOMiddleware(UpdateProductDTO),
+        bodyIsEmptyMiddleware,
+        productExistsMiddleware,
         productControllers.update)
     .delete(productExistsMiddleware, productControllers.remove);
 

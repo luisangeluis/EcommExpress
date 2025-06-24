@@ -6,10 +6,34 @@ const ProductDB = buildDbClient(Product);
 
 export const getAllProducts = async () => await ProductDB.findAll();
 
-export const getProductById = async (id: string) => await ProductDB.findById(id);
+export const getProductById = async (id: string) => {
+    const product = await ProductDB.findById(id);
+    
+    if (!product) {
+        throw new Error(`Product with id ${id} not found`);
+    }   
+    
+    return product;
+}
 
 export const createProduct = async (product: ProductCreationAttributes) => await ProductDB.create({ ...product, id: getUUID() });
 
-export const updateProduct = async (id: string, product: Partial<ProductCreationAttributes>) => await ProductDB.update(id, product);
+export const updateProduct = async (id: string, product: Partial<ProductCreationAttributes>) => {
+    const productExists = await getProductById(id);
 
-export const deleteProduct = async (id: string) => await ProductDB.delete(id);
+    if (!productExists) {
+        throw new Error(`Product with id ${id} not found`);
+    }
+
+    return await ProductDB.update(id, product);
+}
+
+export const deleteProduct = async (id: string) => {
+    const productExists = await getProductById(id);
+    
+    if (!productExists) {
+        throw new Error(`Product with id ${id} not found`);
+    }
+
+    return await ProductDB.delete(id);
+}
