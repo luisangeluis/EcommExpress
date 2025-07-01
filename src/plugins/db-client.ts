@@ -9,6 +9,9 @@ export const buildDbClient = <T extends Model>(model: ModelStatic<T>) => {
         findById: async (id: string, options?: FindOptions<T>) => {
             return await model.findByPk(id, options);
         },
+        findOne:async(options?:FindOptions<T>)=>{
+            return await model.findOne(options);
+        },
         create: async (data: CreationAttributes<T>) => {
             return await model.create(data);
         },

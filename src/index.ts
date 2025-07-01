@@ -13,6 +13,12 @@ connectToDB()//
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 
+app.use("/api/products", productRoutes)
+
+// app.get('/', (req, res) => {
+//   res.send('Hello World!')
+// })
+
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack);
 
@@ -23,12 +29,6 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
     stack: process.env.NODE_ENV === 'production' ? null : err.stack,
   });
 });
-
-app.use("/api/products", productRoutes)
-
-// app.get('/', (req, res) => {
-//   res.send('Hello World!')
-// })
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`)

@@ -16,6 +16,16 @@ export const getUserById = async (id: string) => {
     return user;
 }
 
+export const getUserByEmail = async (email: string) =>{
+    const user = await userDB.findOne({ where: { email } });
+
+    if (!user) {
+        throw new Error(`User with email ${email} not found`);
+    }
+
+    return user;
+}
+
 export const createUser = async (user: UserCreationAttributes) => await userDB.create(user);
 
 export const updateUser = async (id: string, user: Partial<UserCreationAttributes>) => {
