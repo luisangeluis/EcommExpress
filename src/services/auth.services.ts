@@ -1,15 +1,19 @@
-import User from "../models/user";
-import { buildDbClient } from "../plugins/db-client"    
+import { generateToken } from "../utils/generateToken";
+import { getUserByEmail } from "./user.services";
 
-const userDB = buildDbClient(User);
+export const login = async (email: string, pass: string) => {
+    const user = await validateLogin(email, pass);
+    const token = await generateToken(user.id, user.email, user.roleId);
 
-export const login=async(email:string,pass:string)=>{
-    const user = await userDB.findOne({ where: { email} });
-    
-    if (!user || user.password!==pass) {
-        throw new Error(`Invalid email or password`);
+    return { user, token };
+}
+
+export const validateLogin = async (email: string, pass: string) => {
+    const user = await getUserByEmail(email);
+
+    if (!user || user.password !== pass) {
+        throw new Error(`Invalid credentials`);
     }
-    const {password, ...userWithoutPassword} = user ;
-    
-    return userWithoutPassword;
+
+    return user;
 }

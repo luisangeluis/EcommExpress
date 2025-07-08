@@ -13,3 +13,6 @@ export const host = process.env.DB_HOST;
 export const dbName = process.env.DB_NAME as string;
 export const dbUser = process.env.DB_USER as string;
 export const dbPassword = process.env.DB_PASSWORD;
+
+// JsonWebToken
+export const jwtKey = process.env.JWT_KEY as string;
