@@ -1,12 +1,10 @@
 import passport from "passport";
-// import { ExtractJwt, Strategy as JwtStrategy } from "passport-jwt";
+import {jwtKey} from "../config";
 import {ExtractJwt,Strategy as JwtStrategy} from "passport-jwt"
-import dotenv from "dotenv";
 import { getUserById } from "../services/user.services";
 
-dotenv.config();
 
-const jwtKey = process.env.JWT_KEY;
+// const jwtKey = process.env.JWT_KEY;
 
 if (!jwtKey) {
   throw new Error("JWT_KEY is not defined in environment variables.");

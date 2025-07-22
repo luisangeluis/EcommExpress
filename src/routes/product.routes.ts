@@ -7,12 +7,13 @@ import { productExistsMiddleware } from "../middlewares/productExistsMiddleware"
 import { bodyIsEmptyMiddleware } from "../middlewares/bodyIsEmptyMiddleware";
 import { categoryExistsMiddleware } from "../middlewares/categoryExistsMiddleware";
 import { asyncHandler } from "../utils/asyncHandler";
+import passport from "../middlewares/passportMiddleware";
 
 const router = Router();
 
 router.route("/")
     .get(asyncHandler(productControllers.getAll))
-    .post(validateDTOMiddleware(CreateProductDTO),
+    .post( validateDTOMiddleware(CreateProductDTO),
         categoryExistsMiddleware,
         asyncHandler(productControllers.post))
 

@@ -8,5 +8,7 @@ import * as authControllers from "../controllers/auth.controllers";
 const router = Router();
 
 //ADD SWAGGER MIDDLEWARE IN ALL THE PROJECT
-router.route("login")
+router.route("/login")
     .post(validateDTOMiddleware(loginDTO), asyncHandler(authControllers.login));
+
+export default router;

@@ -1,5 +1,6 @@
 import express, { NextFunction, Request, Response } from "express";
 import productRoutes from "./routes/product.routes";
+import authRoutes from "./routes/auth.routes";
 import { connectToDB } from "./db/sequelizeConnect";
 import { port } from "./config";
 
@@ -14,6 +15,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/products", productRoutes)
+app.use("/api/auth", authRoutes)
 
 // app.get('/', (req, res) => {
 //   res.send('Hello World!')
