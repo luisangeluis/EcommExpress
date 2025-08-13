@@ -1,4 +1,4 @@
-import * as productServices from "../services/product.services";
+import * as productServices from "../product.services";
 import {Request,Response, NextFunction} from "express";    
 
 export const productExistsMiddleware = async (req:Request, res:Response, next:NextFunction) => {

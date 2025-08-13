@@ -1,5 +1,5 @@
-import { generateToken } from "../utils/generateToken";
-import { getUserByEmail } from "./user.services";
+import { generateToken } from "../common/utils/generateToken";
+import { getUserByEmail } from "../users/user.services";
 
 export const login = async (email: string, pass: string) => {
     const user = await validateLogin(email, pass);
@@ -8,7 +8,7 @@ export const login = async (email: string, pass: string) => {
     return { user, token };
 }
 
-export const validateLogin = async (email: string, pass: string) => {
+const validateLogin = async (email: string, pass: string) => {
     const user = await getUserByEmail(email);
 
     if (!user || user.password !== pass) {

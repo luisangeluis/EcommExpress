@@ -1,7 +1,7 @@
 import passport from "passport";
-import {jwtKey} from "../config";
+import {jwtKey} from "../../config";
 import {ExtractJwt,Strategy as JwtStrategy} from "passport-jwt"
-import { getUserById } from "../services/user.services";
+import { getUserById } from "../../users/user.services";
 
 
 // const jwtKey = process.env.JWT_KEY;

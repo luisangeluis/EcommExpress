@@ -1,4 +1,4 @@
-import * as categoryServices from "../services/category.services";
+import * as categoryServices from "../category.services";
 import { Request, Response, NextFunction } from "express";
 
 export const categoryExistsMiddleware = async (req: Request, res: Response, next: NextFunction) => {

@@ -1,6 +1,6 @@
 import Product, { ProductCreationAttributes } from "../models/product"
-import { buildDbClient } from "../plugins/db-client";
-import { getUUID } from "../plugins/uuid";
+import { buildDbClient } from "../common/plugins/db-client";
+import { getUUID } from "../common/plugins/uuid";
 
 const ProductDB = buildDbClient(Product);
 

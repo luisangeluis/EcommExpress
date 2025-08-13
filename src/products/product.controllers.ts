@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import * as productServices from "../services/product.services";
-import { asyncHandler } from "../utils/asyncHandler";
+import * as productServices from "./product.services";
+import { asyncHandler } from "../common/utils/asyncHandler";
 
 export const getAll = async (req: Request, res: Response) => {
     const products = await productServices.getAllProducts();

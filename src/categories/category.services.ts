@@ -1,5 +1,5 @@
 import Category from "../models/category";
-import { buildDbClient } from "../plugins/db-client";
+import { buildDbClient } from "../common/plugins/db-client";
 
 const CategoryDB = buildDbClient(Category);
 

@@ -1,6 +1,6 @@
 import exp from "constants";
 import User, { UserCreationAttributes } from "../models/user";
-import { buildDbClient } from "../plugins/db-client"
+import { buildDbClient } from "../common/plugins/db-client"
 
 const userDB = buildDbClient(User);
 

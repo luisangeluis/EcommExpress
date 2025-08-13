@@ -2,7 +2,7 @@ import Category from "../models/category";
 import Product from "../models/product";
 import Role from "../models/role";
 import User from "../models/user";
-import { getUUID } from "../plugins/uuid";
+import { getUUID } from "../common/plugins/uuid";
 import { sequelize } from "../db/sequelizeConnect";
 
 export const createFakeData = async () => {

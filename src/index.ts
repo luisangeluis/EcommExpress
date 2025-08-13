@@ -1,6 +1,6 @@
 import express, { NextFunction, Request, Response } from "express";
-import productRoutes from "./routes/product.routes";
-import authRoutes from "./routes/auth.routes";
+import productRoutes from "./products/product.routes";
+import authRoutes from "./auth/auth.routes";
 import { connectToDB } from "./db/sequelizeConnect";
 import { port } from "./config";
 
