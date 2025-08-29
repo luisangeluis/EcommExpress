@@ -1,8 +1,11 @@
 import express, { NextFunction, Request, Response } from "express";
+import cors from "cors";
 import productRoutes from "./products/product.routes";
 import authRoutes from "./auth/auth.routes";
 import { connectToDB } from "./db/sequelizeConnect";
 import { port } from "./config";
+import swaggerSpec from "./swagger/swaggerConfig";
+import swaggerUi from "swagger-ui-express";
 
 const app = express();
 // const port = port || 3000;
@@ -11,8 +14,10 @@ connectToDB()//
   .then(() => console.log("DB connected"))
   .catch(error => console.log(error.message));
 
+app.use(cors());
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use("/api/products", productRoutes)
 app.use("/api/auth", authRoutes)
