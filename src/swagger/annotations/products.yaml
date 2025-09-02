@@ -5,3 +5,18 @@ paths:
       responses:
         "200":
           description: List of products
+
+  /products/{id}:
+    get:
+      summary: Get a product by Id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A single product
+        "404":
+          description: Product not found

@@ -6,15 +6,7 @@ const ProductDB = buildDbClient(Product);
 
 export const getAllProducts = async () => await ProductDB.findAll();
 
-export const getProductById = async (id: string) => {
-    const product = await ProductDB.findById(id);
-    
-    if (!product) {
-        throw new Error(`Product with id ${id} not found`);
-    }   
-    
-    return product;
-}
+export const getProductById = async (id: string) => await ProductDB.findById(id);
 
 export const createProduct = async (product: ProductCreationAttributes) => await ProductDB.create({ ...product, id: getUUID() });
 

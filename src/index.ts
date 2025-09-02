@@ -21,19 +21,28 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use("/api/products", productRoutes)
 app.use("/api/auth", authRoutes)
+app.get("/", (req, res) => {
+  res.status(200).json({ message: "Server is running" });
+});
 
-// app.get('/', (req, res) => {
-//   res.send('Hello World!')
-// })
+app.use((req, res, next) => {
+  res.status(404);
+  const error = new Error(`Not Found - ${req.originalUrl}`);
+  next(error); // importante -> manda el error al manejador global
+});
 
-app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-  console.error(err.stack);
 
-  const status = res.statusCode !== 200 ? res.statusCode : 500;
+app.use((error: any, req: Request, res: Response, next: NextFunction) => {
+  console.error("Error:", error);
+  console.error("statusCode", error.statusCode);
+
+  // Si ya tenemos un status distinto de 200, lo respetamos; si no, asumimos 500
+  const status = error.statusCode ?? 500;
 
   res.status(status).json({
-    message: err.message,
-    stack: process.env.NODE_ENV === 'production' ? null : err.stack,
+    status,
+    message: error.message || "Internal Server Error",
+    stack: process.env.NODE_ENV === "production" ? null : error.stack,
   });
 });
 
