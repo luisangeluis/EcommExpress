@@ -1,11 +1,16 @@
-import express, { NextFunction, Request, Response } from "express";
+import "express-async-errors";
+import express, { ErrorRequestHandler, NextFunction, Request, Response } from "express";
 import cors from "cors";
-import productRoutes from "./products/product.routes";
-import authRoutes from "./auth/auth.routes";
+
 import { connectToDB } from "./db/sequelizeConnect";
 import { port } from "./config";
+
 import swaggerSpec from "./swagger/swaggerConfig";
 import swaggerUi from "swagger-ui-express";
+
+import productRoutes from "./products/product.routes";
+import authRoutes from "./auth/auth.routes";
+import globalErrorHandler from "./common/utils/globalErrorHandler";
 
 const app = express();
 // const port = port || 3000;
@@ -31,20 +36,7 @@ app.use((req, res, next) => {
   next(error); // importante -> manda el error al manejador global
 });
 
-
-app.use((error: any, req: Request, res: Response, next: NextFunction) => {
-  console.error("Error:", error);
-  console.error("statusCode", error.statusCode);
-
-  // Si ya tenemos un status distinto de 200, lo respetamos; si no, asumimos 500
-  const status = error.statusCode ?? 500;
-
-  res.status(status).json({
-    status,
-    message: error.message || "Internal Server Error",
-    stack: process.env.NODE_ENV === "production" ? null : error.stack,
-  });
-});
+app.use(globalErrorHandler);
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`)

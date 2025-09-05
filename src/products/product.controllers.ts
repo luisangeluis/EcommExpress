@@ -1,11 +1,10 @@
-import { Request, RequestHandler, Response } from "express";
+import { Request, Response } from "express";
 import * as productServices from "./product.services";
-import { asyncHandler } from "../common/utils/asyncHandler";
 import { AppError } from "../common/utils/appError";
 
-export const getAll = async (req: Request, res: Response): Promise<Response> => {
+export const getAll = async (req: Request, res: Response) => {
     const products = await productServices.getAllProducts();
-    return res.status(200).json(products);
+    res.status(200).json(products);
 }
 
 export const getById = async (req: Request, res: Response) => {
@@ -13,13 +12,12 @@ export const getById = async (req: Request, res: Response) => {
 
     const product = await productServices.getProductById(id);
     // console.log(product);
-    
-    if (!product) {
-        console.log("no product")
-        throw new AppError(`Product with id ${id} not found`,404);
-    }
 
-    return res.status(200).json(product);
+    if (!product) {
+        throw new AppError(`Product with id ${id} not found`, 404);
+    }
+    
+    res.status(200).json(product);
 }
 
 export const post = async (req: Request, res: Response) => {

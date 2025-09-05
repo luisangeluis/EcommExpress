@@ -12,12 +12,13 @@ import passport from "../common/middlewares/passportMiddleware";
 const router = Router();
 
 router.route("/")
-    .get(asyncHandler(productControllers.getAll))
-    // .get(productControllers.getAll)
+    // .get(asyncHandler(productControllers.getAll))
+    .get(productControllers.getAll)
     .post(validateDTOMiddleware(CreateProductDTO), categoryExistsMiddleware, asyncHandler(productControllers.post))
 
 router.route("/:id")
-    .get(asyncHandler(productControllers.getById))
+    // .get(asyncHandler(productControllers.getById))
+    .get(productControllers.getById)
     .put(validateDTOMiddleware(UpdateProductDTO), bodyIsEmptyMiddleware, productExistsMiddleware, productControllers.update)
     .delete(productExistsMiddleware, productControllers.remove);
 
